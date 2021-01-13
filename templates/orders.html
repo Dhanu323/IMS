@@ -1,0 +1,119 @@
+{% extends 'modules/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row vertical">
+            <div class="col-sm-12">
+                <div class="breadcrumb">
+                    <p><a href="{% url 'index' %}">Home</a> / Orders </p>
+                </div>
+                <div class="card card-outline-secondary">
+                    <div class="card-header">
+                        <h3 class="mb-0 text-center">Manage Orders</h3>
+                    </div>
+                    <div class="card-block">
+                        <form class="form form-horizontal" method="post" action="" id="createOrderForm">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="orderDate" class="col-sm-2 control-label">Order Date</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="orderDate" name="orderDate"
+                                           autocomplete="off"/>
+                                </div>
+                            </div> <!--/form-group-->
+
+
+                            <div class="form-group">
+                                <label for="clientName" class="col-sm-2 control-label">Client Name</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="clientName" name="clientName"
+                                           placeholder="Client Name" autocomplete="off"/>
+                                </div>
+                            </div> <!--/form-group-->
+                            <div class="form-group">
+                                <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="clientContact" name="clientContact"
+                                           placeholder="Contact Number" autocomplete="off"/>
+                                </div>
+                            </div>
+
+                            <table class="table" id="productTable">
+                                <thead>
+                                    <tr>
+                                        <th width="30%">Product</th>
+                                        
+                                        <th width="15%">Quantity</th>
+                                        <th width="20%">Total</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="" class="">
+                                        <td>
+                                            <div class="form-group">
+
+                                                <select class="form-control" name="productName[]"
+                                                        id="productName<?php echo $x; ?>"
+                                                        onchange="">
+                                                    <option value="">SELECT</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                       
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="quantity[]" id="quantity<?php echo $x; ?>"
+                                                       onkeyup="" autocomplete="off"
+                                                       class="form-control" min="1"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="code" required="" autocomplete="off">
+                                            <input type="hidden" name="totalValue[]" id="totalValue<?php echo $x; ?>"
+                                                   autocomplete="off" class="form-control"/>
+                                        </td>
+                                        <td>
+
+                                            <button class="btn btn-default removeProductRowBtn" type="button"
+                                                    id="removeProductRowBtn" onclick="">
+                                                <i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                  
+
+                                                <button type="submit" id="createOrderBtn" data-loading-text="Loading..."
+                                                        class="btn btn-success"><i
+                                                        class="glyphicon glyphicon-ok-sign"></i> Save Changes
+                                                </button>
+
+                                                <button type="reset" class="btn btn-default" onclick="resetOrderForm()">
+                                                    <i class="glyphicon glyphicon-erase"></i> Reset
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!--/card-block-->
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/order.js' %}"></script>
+{% endblock %}
